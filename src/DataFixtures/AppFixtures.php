@@ -38,49 +38,78 @@ class AppFixtures extends Fixture
         // ARTICLES FIXTURES
 
 
-        $allHauts = ['chemise', 'blouse', 'pull', 'gilet', 'tee-shirt'];
-        foreach ($allHauts as $hautName) {
+        $allHauts = [
+            'chemise' => 'chemise.webp',
+            'blouse' => 'blouse.webp',
+            'pull' => 'pull.webp',
+            'tee-shirt' => 'teeshirt.webp'
+        ];
+        foreach ($allHauts as $hautName => $imgUrl) {
             $article = new Article();
             $article->setArticleName($hautName);
             $article->setIdCategory($hauts);
+            $article->setImgUrl($imgUrl);
             $manager->persist($article);
         }
 
-        $allBas = ['pantalon', 'jupe_courte', 'short', 'jupe_longue'];
-        foreach ($allBas as $basName) {
+        $allBas = [
+            'pantalon' => 'pantalon.webp',
+            'jupe_courte' => 'jupecourte.webp',
+            'short' => 'short.webp',
+            'jupe_longue' => 'jupelongue.webp'
+        ];
+        foreach ($allBas as $basName => $imgUrl) {
             $article = new Article();
             $article->setArticleName($basName);
             $article->setIdCategory($bas);
+            $article->setImgUrl($imgUrl);
             $manager->persist($article);
         }
 
-        $allRobes = ['robe_longue', 'robe_courte', 'combinaison', 'combishort'];
-        foreach ($allRobes as $robeName) {
+        $allRobes = [
+            'robe_longue' => 'robelongue.webp',
+            'robe_courte' => 'robecourte.webp',
+            'combinaison' => 'combinaison.webp',
+            'combishort' => 'combishort.webp'
+        ];
+        foreach ($allRobes as $robeName => $imgUrl) {
             $article = new Article();
             $article->setArticleName($robeName);
             $article->setIdCategory($robes);
+            $article->setImgUrl($imgUrl);
             $manager->persist($article);
         }
 
-        $allAccessories = ['echarpe', 'twillie', 'foulard'];
-        foreach ($allAccessories as $accessoryName) {
+        $allAccessories = [
+            'echarpe' => 'echarpe.webp',
+            'twillie' => 'twillie.webp',
+            'foulard' => 'foulard.webp'
+        ];
+        foreach ($allAccessories as $accessoryName => $imgUrl) {
             $article = new Article();
             $article->setArticleName($accessoryName);
             $article->setIdCategory($accessoires);
+            $article->setImgUrl($imgUrl);
             $manager->persist($article);
         }
 
-        $allManteau = ['manteau_court', 'manteau_long', 'veste_longue', 'veste_courte'];
-        foreach ($allManteau as $manteauName) {
+        $allManteau = [
+            'manteau_court' => 'manteaucourt.webp',
+            'manteau_long' => 'manteaulong.webp',
+            'veste_longue' => 'vestelongue.webp',
+            'veste_courte' => 'vestecourte.webp'
+        ];
+        foreach ($allManteau as $manteauName => $imgUrl) {
             $article = new Article();
             $article->setArticleName($manteauName);
             $article->setIdCategory($manteau);
+            $article->setImgUrl($imgUrl);
             $manager->persist($article);
         }
 
 
         // FABRIC FIXTURES
-        
+
 
         $fabrics = ['coton', 'laine', 'synthétique', 'soie', 'cachemire', 'lin', 'cuir', 'velours'];
         foreach ($fabrics as $fabricName) {
