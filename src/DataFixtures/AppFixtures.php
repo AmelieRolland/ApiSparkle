@@ -11,10 +11,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $chemise = new Article();
-        // $chemise->setArticleName('Chemise');
-        // $chemise->setCoeff(0.5);                
-        // $manager->persist($chemise);
+        // CATEGORIES FIXTURES
 
         $hauts = new Category();
         $hauts->setCategoryName('Hauts');
@@ -31,6 +28,61 @@ class AppFixtures extends Fixture
         $accessoires = new Category();
         $accessoires->setCategoryName('Accessoires');
         $manager->persist($accessoires);
+
+        $manteau = new Category();
+        $manteau->setCategoryName('Manteau');
+        $manager->persist($manteau);
+
+        // ARTICLES FIXTURES
+
+
+        $allHauts = ['chemise', 'blouse', 'pull', 'gilet', 'tee-shirt'];
+        foreach ($allHauts as $hautName) {
+            $article = new Article();
+            $article->setArticleName($hautName);
+            $article->setIdCategory($hauts);
+            $manager->persist($article);
+        }
+
+        $allBas = ['pantalon', 'jupe_courte', 'short', 'jupe_longue'];
+        foreach ($allBas as $basName) {
+            $article = new Article();
+            $article->setArticleName($basName);
+            $article->setIdCategory($bas);
+            $manager->persist($article);
+        }
+
+        $allRobes = ['robe_longue', 'robe_courte', 'combinaison', 'combishort'];
+        foreach ($allRobes as $robeName) {
+            $article = new Article();
+            $article->setArticleName($robeName);
+            $article->setIdCategory($robes);
+            $manager->persist($article);
+        }
+
+        $allAccessories = ['echarpe', 'twillie', 'foulard'];
+        foreach ($allAccessories as $accessoryName) {
+            $article = new Article();
+            $article->setArticleName($accessoryName);
+            $article->setIdCategory($accessoires);
+            $manager->persist($article);
+        }
+
+        $allManteau = ['manteau_court', 'manteau_long', 'veste_longue', 'veste_courte'];
+        foreach ($allManteau as $manteauName) {
+            $article = new Article();
+            $article->setArticleName($manteauName);
+            $article->setIdCategory($manteau);
+            $manager->persist($article);
+        }
+
+
+
+
+
+
+
+
 
         $manager->flush();
     }
