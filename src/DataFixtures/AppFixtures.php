@@ -39,71 +39,76 @@ class AppFixtures extends Fixture
 
 
         $allHauts = [
-            'chemise' => 'chemise.webp',
-            'blouse' => 'blouse.webp',
-            'pull' => 'pull.webp',
-            'tee-shirt' => 'teeshirt.webp'
+            ['name' => 'chemise', 'imgUrl' => 'chemise.webp', 'coeff' => 1.2],
+            ['name' => 'blouse', 'imgUrl' => 'blouse.webp', 'coeff' => 1.1],
+            ['name' => 'pull', 'imgUrl' => 'pull.webp', 'coeff' => 1.2],
+            ['name' => 'tee-shirt', 'imgUrl' => 'teeshirt.webp', 'coeff' => 1.0],
         ];
-        foreach ($allHauts as $hautName => $imgUrl) {
+        foreach ($allHauts as $haut) {
             $article = new Article();
-            $article->setArticleName($hautName);
+            $article->setArticleName($haut['name']);
             $article->setIdCategory($hauts);
-            $article->setImgUrl($imgUrl);
+            $article->setImgUrl($haut['imgUrl']);
+            $article->setCoeff($haut['coeff']);
             $manager->persist($article);
         }
 
         $allBas = [
-            'pantalon' => 'pantalon.webp',
-            'jupe_courte' => 'jupecourte.webp',
-            'short' => 'short.webp',
-            'jupe_longue' => 'jupelongue.webp'
+            ['name' => 'pantalon', 'imgUrl' => 'pantalon.webp', 'coeff' => 1.4],
+            ['name' => 'jupe_courte', 'imgUrl' => 'jupecourte.webp', 'coeff' => 1.2],
+            ['name' => 'short', 'imgUrl' => 'short.webp', 'coeff' => 1.3],
+            ['name' => 'jupe_longue', 'imgUrl' => 'jupelongue.webp', 'coeff' => 1.3],
         ];
-        foreach ($allBas as $basName => $imgUrl) {
+        foreach ($allBas as $basName) {
             $article = new Article();
-            $article->setArticleName($basName);
+            $article->setArticleName($basName['name']);
             $article->setIdCategory($bas);
-            $article->setImgUrl($imgUrl);
+            $article->setImgUrl($basName['imgUrl']);
+            $article->setCoeff($basName['coeff']);
             $manager->persist($article);
         }
 
         $allRobes = [
-            'robe_longue' => 'robelongue.webp',
-            'robe_courte' => 'robecourte.webp',
-            'combinaison' => 'combinaison.webp',
-            'combishort' => 'combishort.webp'
+            ['name' => 'robe_longue', 'imgUrl' => 'robelongue.webp', 'coeff' => 1.6],
+            ['name' => 'robe_courte', 'imgUrl' => 'robecourte.webp', 'coeff' => 1.3],
+            ['name' => 'combinaison', 'imgUrl' => 'combinaison.webp', 'coeff' => 1.6],
+            ['name' => 'combishort', 'imgUrl' => 'combishort.webp', 'coeff' => 1.4],
         ];
-        foreach ($allRobes as $robeName => $imgUrl) {
+        foreach ($allRobes as $robe) {
             $article = new Article();
-            $article->setArticleName($robeName);
+            $article->setArticleName($robe['name']);
             $article->setIdCategory($robes);
-            $article->setImgUrl($imgUrl);
+            $article->setImgUrl($robe['imgUrl']);
+            $article->setCoeff($robe['coeff']);
             $manager->persist($article);
         }
 
         $allAccessories = [
-            'echarpe' => 'echarpe.webp',
-            'twillie' => 'twillie.webp',
-            'foulard' => 'foulard.webp'
+            ['name' => 'echarpe', 'imgUrl' => 'echarpe.webp', 'coeff' => 1.8],
+            ['name' => 'twillie', 'imgUrl' => 'twillie.webp', 'coeff' => 1.9],
+            ['name' => 'foulard', 'imgUrl' => 'foulard.webp', 'coeff' => 1.6],
         ];
-        foreach ($allAccessories as $accessoryName => $imgUrl) {
+        foreach ($allAccessories as $accessory) {
             $article = new Article();
-            $article->setArticleName($accessoryName);
+            $article->setArticleName($accessory['name']);
             $article->setIdCategory($accessoires);
-            $article->setImgUrl($imgUrl);
+            $article->setImgUrl($accessory['imgUrl']);
+            $article->setCoeff($accessory['coeff']);
             $manager->persist($article);
         }
 
         $allManteau = [
-            'manteau_court' => 'manteaucourt.webp',
-            'manteau_long' => 'manteaulong.webp',
-            'veste_longue' => 'vestelongue.webp',
-            'veste_courte' => 'vestecourte.webp'
+            ['name' => 'manteau_court', 'imgUrl' => 'manteaucourt.webp', 'coeff' => 2.3],
+            ['name' => 'manteau_long', 'imgUrl' => 'manteaulong.webp', 'coeff' => 2.5],
+            ['name' => 'veste_longue', 'imgUrl' => 'vestelongue.webp', 'coeff' => 1.9],
+            ['name' => 'veste_courte', 'imgUrl' => 'vestecourte.webp', 'coeff' => 1.8],
         ];
-        foreach ($allManteau as $manteauName => $imgUrl) {
+        foreach ($allManteau as $manteauName) {
             $article = new Article();
-            $article->setArticleName($manteauName);
+            $article->setArticleName($manteauName['name']);
             $article->setIdCategory($manteau);
-            $article->setImgUrl($imgUrl);
+            $article->setImgUrl($manteauName['imgUrl']);
+            $article->setCoeff($manteauName['coeff']);
             $manager->persist($article);
         }
 
@@ -111,12 +116,23 @@ class AppFixtures extends Fixture
         // FABRIC FIXTURES
 
 
-        $fabrics = ['coton', 'laine', 'synthétique', 'soie', 'cachemire', 'lin', 'cuir', 'velours'];
-        foreach ($fabrics as $fabricName) {
-            $fabric = new Fabric();
-            $fabric->setFabricName($fabricName);
-            $manager->persist($fabric);
+        $allFabrics = [
+            ['name' => 'coton', 'coeff' => 1.0],
+            ['name' => 'laine', 'coeff' => 2],
+            ['name' => 'synthétique', 'coeff' => 0.9],
+            ['name' => 'soie', 'coeff' => 2],
+            ['name' => 'cachemire', 'coeff' => 2,4],
+            ['name' => 'lin', 'coeff' => 1.8],
+            ['name' => 'cuir', 'coeff' => 2.4],
+            ['name' => 'velours', 'coeff' => 1.6],
+        ];
+        foreach ($allFabrics as $fabric) {
+            $fabricEntity = new Fabric();
+            $fabricEntity->setFabricName($fabric['name']);
+            $fabricEntity->setCoeff($fabric['coeff']);
+            $manager->persist($fabricEntity);
         }
+    
 
 
 
