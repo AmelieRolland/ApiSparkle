@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Fabric;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -32,6 +33,7 @@ class AppFixtures extends Fixture
         $manteau = new Category();
         $manteau->setCategoryName('Manteau');
         $manager->persist($manteau);
+
 
         // ARTICLES FIXTURES
 
@@ -74,6 +76,17 @@ class AppFixtures extends Fixture
             $article->setArticleName($manteauName);
             $article->setIdCategory($manteau);
             $manager->persist($article);
+        }
+
+
+        // FABRIC FIXTURES
+        
+
+        $fabrics = ['coton', 'laine', 'synthétique', 'soie', 'cachemire', 'lin', 'cuir', 'velours'];
+        foreach ($fabrics as $fabricName) {
+            $fabric = new Fabric();
+            $fabric->setFabricName($fabricName);
+            $manager->persist($fabric);
         }
 
 
