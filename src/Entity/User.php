@@ -44,6 +44,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $registration_date = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $birthday = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?gender $gender = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -163,6 +170,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRegistrationDate(\DateTimeInterface $registration_date): static
     {
         $this->registration_date = $registration_date;
+
+        return $this;
+    }
+
+    public function getBirthday(): ?\DateTimeInterface
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(?\DateTimeInterface $birthday): static
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    public function getGender(): ?gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?gender $gender): static
+    {
+        $this->gender = $gender;
 
         return $this;
     }

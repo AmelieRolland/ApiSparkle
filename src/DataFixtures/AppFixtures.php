@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Fabric;
+use App\Entity\Gender;
 use App\Entity\Service;
 use App\Entity\Status;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -155,8 +156,18 @@ class AppFixtures extends Fixture
 
         foreach ($allStatus as $status) {
             $statusEntity = new Status();
-            $statusEntity->setStatusName($status['name']);
+            $statusEntity->setStatusName($status);
             $manager->persist($statusEntity);
+        }
+
+        // GENDER FIXTURES
+
+        $allGender = ['homme', 'femme','autre'];
+
+        foreach ($allGender as $gender) {
+            $genderEntity = new Gender();
+            $genderEntity->setGenderName($gender);
+            $manager->persist($genderEntity);
         }
     
 
