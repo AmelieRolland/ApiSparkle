@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Fabric;
+use App\Entity\Service;
+use App\Entity\Status;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -132,15 +134,31 @@ class AppFixtures extends Fixture
             $fabricEntity->setCoeff($fabric['coeff']);
             $manager->persist($fabricEntity);
         }
+
+
+        // SERVICES FIXTURES
+
+        $allServices = [
+            [ 'name' => 'nettoyage', 'price' => 5],
+            [ 'name' => 'repassage', 'price' => 3]
+        ];
+        foreach ($allServices as $service) {
+            $serviceEntity = new Service();
+            $serviceEntity->setServiceName($service['name']);
+            $serviceEntity->setPrice($service['price']);
+            $manager->persist($serviceEntity);
+        }
+
+        // STATUS FIXTURES
+
+        $allStatus = ['en cours','terminé'];
+
+        foreach ($allStatus as $status) {
+            $statusEntity = new Status();
+            $statusEntity->setStatusName($status['name']);
+            $manager->persist($statusEntity);
+        }
     
-
-
-
-
-
-
-
-
 
         $manager->flush();
     }
