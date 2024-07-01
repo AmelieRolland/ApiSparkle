@@ -8,13 +8,50 @@ use App\Entity\Fabric;
 use App\Entity\Gender;
 use App\Entity\Service;
 use App\Entity\Status;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(private UserPasswordHasherInterface $hasher)
+    {
+    }
     public function load(ObjectManager $manager): void
     {
+
+        // GENDER FIXTURES
+
+        $allGender = ['homme', 'femme', 'autre'];
+
+        foreach ($allGender as $gender) {
+            $genderEntity = new Gender();
+            $genderEntity->setGenderName($gender);
+            $manager->persist($genderEntity);
+        }
+
+        $user = new User();
+        $user
+            ->setEmail('user@test.com')
+            ->setPassword($this->hasher->hashPassword($user, 'test'))
+            ->setName('amelie');
+
+
+        $manager->persist($user);
+
+        $adminUser = new User();
+        $adminUser
+            ->setEmail('admin@sparkle.com')
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPassword($this->hasher->hashPassword($adminUser, 'admin'))
+            ->setName('admin');
+
+
+        $manager->persist($adminUser);
+
+
+
         // CATEGORIES FIXTURES
 
         $hauts = new Category();
@@ -124,7 +161,7 @@ class AppFixtures extends Fixture
             ['name' => 'laine', 'coeff' => 2],
             ['name' => 'synthétique', 'coeff' => 0.9],
             ['name' => 'soie', 'coeff' => 2],
-            ['name' => 'cachemire', 'coeff' => 2,4],
+            ['name' => 'cachemire', 'coeff' => 2, 4],
             ['name' => 'lin', 'coeff' => 1.8],
             ['name' => 'cuir', 'coeff' => 2.4],
             ['name' => 'velours', 'coeff' => 1.6],
@@ -140,8 +177,8 @@ class AppFixtures extends Fixture
         // SERVICES FIXTURES
 
         $allServices = [
-            [ 'name' => 'nettoyage', 'price' => 5],
-            [ 'name' => 'repassage', 'price' => 3]
+            ['name' => 'nettoyage', 'price' => 5],
+            ['name' => 'repassage', 'price' => 3]
         ];
         foreach ($allServices as $service) {
             $serviceEntity = new Service();
@@ -152,7 +189,7 @@ class AppFixtures extends Fixture
 
         // STATUS FIXTURES
 
-        $allStatus = ['en cours','terminé'];
+        $allStatus = ['en cours', 'terminé'];
 
         foreach ($allStatus as $status) {
             $statusEntity = new Status();
@@ -160,16 +197,8 @@ class AppFixtures extends Fixture
             $manager->persist($statusEntity);
         }
 
-        // GENDER FIXTURES
 
-        $allGender = ['homme', 'femme','autre'];
 
-        foreach ($allGender as $gender) {
-            $genderEntity = new Gender();
-            $genderEntity->setGenderName($gender);
-            $manager->persist($genderEntity);
-        }
-    
 
         $manager->flush();
     }
