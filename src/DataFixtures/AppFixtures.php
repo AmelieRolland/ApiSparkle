@@ -34,7 +34,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user
             ->setEmail('user@test.com')
-            ->setPassword($this->hasher->hashPassword($user, 'test'))
+            ->setPassword('test')
             ->setName('amelie');
 
 
@@ -44,7 +44,7 @@ class AppFixtures extends Fixture
         $adminUser
             ->setEmail('admin@sparkle.com')
             ->setRoles(['ROLE_ADMIN'])
-            ->setPassword($this->hasher->hashPassword($adminUser, 'admin'))
+            ->setPassword('admin')
             ->setName('admin');
 
 
@@ -189,7 +189,7 @@ class AppFixtures extends Fixture
 
         // STATUS FIXTURES
 
-        $allStatus = ['en cours', 'terminé'];
+        $allStatus = ['en cours', 'terminée', 'annulée'];
 
         foreach ($allStatus as $status) {
             $statusEntity = new Status();
