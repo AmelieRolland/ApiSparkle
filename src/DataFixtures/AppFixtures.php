@@ -23,7 +23,7 @@ class AppFixtures extends Fixture
 
         // GENDER FIXTURES
 
-        $allGender = ['homme', 'femme', 'autre'];
+        $allGender = ['Monsieur', 'Madame', 'Autre'];
 
         foreach ($allGender as $gender) {
             $genderEntity = new Gender();
@@ -79,10 +79,10 @@ class AppFixtures extends Fixture
 
 
         $allHauts = [
-            ['name' => 'chemise', 'imgUrl' => 'chemise.webp', 'coeff' => 1.2],
-            ['name' => 'blouse', 'imgUrl' => 'blouse.webp', 'coeff' => 1.1],
-            ['name' => 'pull', 'imgUrl' => 'pull.webp', 'coeff' => 1.2],
-            ['name' => 'tee-shirt', 'imgUrl' => 'teeshirt.webp', 'coeff' => 1.0],
+            ['name' => 'Chemise', 'imgUrl' => 'chemise.webp', 'coeff' => 1.2],
+            ['name' => 'Blouse', 'imgUrl' => 'blouse.webp', 'coeff' => 1.1],
+            ['name' => 'Pull', 'imgUrl' => 'pull.webp', 'coeff' => 1.2],
+            ['name' => 'Tee-shirt', 'imgUrl' => 'teeshirt.webp', 'coeff' => 1.0],
         ];
         foreach ($allHauts as $haut) {
             $article = new Article();
@@ -94,10 +94,10 @@ class AppFixtures extends Fixture
         }
 
         $allBas = [
-            ['name' => 'pantalon', 'imgUrl' => 'pantalon.webp', 'coeff' => 1.4],
-            ['name' => 'jupe_courte', 'imgUrl' => 'jupecourte.webp', 'coeff' => 1.2],
-            ['name' => 'short', 'imgUrl' => 'short.webp', 'coeff' => 1.3],
-            ['name' => 'jupe_longue', 'imgUrl' => 'jupelongue.webp', 'coeff' => 1.3],
+            ['name' => 'Pantalon', 'imgUrl' => 'pantalon.webp', 'coeff' => 1.4],
+            ['name' => 'Jupe courte', 'imgUrl' => 'jupecourte.webp', 'coeff' => 1.2],
+            ['name' => 'Short', 'imgUrl' => 'short.webp', 'coeff' => 1.3],
+            ['name' => 'Jupe longue', 'imgUrl' => 'jupelongue.webp', 'coeff' => 1.3],
         ];
         foreach ($allBas as $basName) {
             $article = new Article();
@@ -109,10 +109,10 @@ class AppFixtures extends Fixture
         }
 
         $allRobes = [
-            ['name' => 'robe_longue', 'imgUrl' => 'robelongue.webp', 'coeff' => 1.6],
-            ['name' => 'robe_courte', 'imgUrl' => 'robecourte.webp', 'coeff' => 1.3],
-            ['name' => 'combinaison', 'imgUrl' => 'combinaison.webp', 'coeff' => 1.6],
-            ['name' => 'combishort', 'imgUrl' => 'combishort.webp', 'coeff' => 1.4],
+            ['name' => 'Robe longue', 'imgUrl' => 'robelongue.webp', 'coeff' => 1.6],
+            ['name' => 'Robe courte', 'imgUrl' => 'robecourte.webp', 'coeff' => 1.3],
+            ['name' => 'Combinaison', 'imgUrl' => 'combinaison.webp', 'coeff' => 1.6],
+            ['name' => 'Combishort', 'imgUrl' => 'combishort.webp', 'coeff' => 1.4],
         ];
         foreach ($allRobes as $robe) {
             $article = new Article();
@@ -124,9 +124,9 @@ class AppFixtures extends Fixture
         }
 
         $allAccessories = [
-            ['name' => 'echarpe', 'imgUrl' => 'echarpe.webp', 'coeff' => 1.8],
-            ['name' => 'twillie', 'imgUrl' => 'twillie.webp', 'coeff' => 1.9],
-            ['name' => 'foulard', 'imgUrl' => 'foulard.webp', 'coeff' => 1.6],
+            ['name' => 'Echarpe', 'imgUrl' => 'echarpe.webp', 'coeff' => 1.8],
+            ['name' => 'Twillie', 'imgUrl' => 'twillie.webp', 'coeff' => 1.9],
+            ['name' => 'Foulard', 'imgUrl' => 'foulard.webp', 'coeff' => 1.6],
         ];
         foreach ($allAccessories as $accessory) {
             $article = new Article();
@@ -138,10 +138,10 @@ class AppFixtures extends Fixture
         }
 
         $allManteau = [
-            ['name' => 'manteau_court', 'imgUrl' => 'manteaucourt.webp', 'coeff' => 2.3],
-            ['name' => 'manteau_long', 'imgUrl' => 'manteaulong.webp', 'coeff' => 2.5],
-            ['name' => 'veste_longue', 'imgUrl' => 'vestelongue.webp', 'coeff' => 1.9],
-            ['name' => 'veste_courte', 'imgUrl' => 'vestecourte.webp', 'coeff' => 1.8],
+            ['name' => 'Manteau court', 'imgUrl' => 'manteaucourt.webp', 'coeff' => 2.3],
+            ['name' => 'Manteau long', 'imgUrl' => 'manteaulong.webp', 'coeff' => 2.5],
+            ['name' => 'Veste longue', 'imgUrl' => 'vestelongue.webp', 'coeff' => 1.9],
+            ['name' => 'Veste courte', 'imgUrl' => 'vestecourte.webp', 'coeff' => 1.8],
         ];
         foreach ($allManteau as $manteauName) {
             $article = new Article();
@@ -157,14 +157,14 @@ class AppFixtures extends Fixture
 
 
         $allFabrics = [
-            ['name' => 'coton', 'coeff' => 1.0],
-            ['name' => 'laine', 'coeff' => 2],
-            ['name' => 'synthétique', 'coeff' => 0.9],
-            ['name' => 'soie', 'coeff' => 2],
-            ['name' => 'cachemire', 'coeff' => 2, 4],
-            ['name' => 'lin', 'coeff' => 1.8],
-            ['name' => 'cuir', 'coeff' => 2.4],
-            ['name' => 'velours', 'coeff' => 1.6],
+            ['name' => 'Coton', 'coeff' => 1.0],
+            ['name' => 'Laine', 'coeff' => 2],
+            ['name' => 'Synthétique', 'coeff' => 0.9],
+            ['name' => 'Soie', 'coeff' => 2],
+            ['name' => 'Cachemire', 'coeff' => 2, 4],
+            ['name' => 'Lin', 'coeff' => 1.8],
+            ['name' => 'Cuir', 'coeff' => 2.4],
+            ['name' => 'Velours', 'coeff' => 1.6],
         ];
         foreach ($allFabrics as $fabric) {
             $fabricEntity = new Fabric();
@@ -177,8 +177,8 @@ class AppFixtures extends Fixture
         // SERVICES FIXTURES
 
         $allServices = [
-            ['name' => 'nettoyage', 'price' => 5],
-            ['name' => 'repassage', 'price' => 3]
+            ['name' => 'Nettoyage', 'price' => 5],
+            ['name' => 'Repassage', 'price' => 3]
         ];
         foreach ($allServices as $service) {
             $serviceEntity = new Service();
