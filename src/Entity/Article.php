@@ -7,23 +7,33 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['article:read']],
+    denormalizationContext: ['groups' => ['article:write']]
+)]
 class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[SerializedName('articleName')]
+    #[Groups(['article:read', 'article:write'])]
     private ?string $article_name = null;
 
     #[ORM\Column]
+    #[Groups(['article:read', 'article:write'])]
     private ?float $coeff = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[Groups(['article:read', 'article:write'])]
     private ?Category $id_category = null;
 
     /**
@@ -33,6 +43,7 @@ class Article
     private Collection $items;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['article:read', 'article:write'])]
     private ?string $imgUrl = null;
 
     public function __construct()
