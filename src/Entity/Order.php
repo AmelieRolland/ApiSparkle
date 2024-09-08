@@ -6,6 +6,10 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\OrderRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\SerializedName;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -17,15 +21,16 @@ class Order
     #[ORM\Column]
     private ?int $id = null;
 
-
     #[ORM\Column]
     private ?float $price = null;
 
     #[ORM\Column]
+    #[SerializedName('optionDelivery')]
     private ?bool $option_delivery = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $delivery_date = null;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    #[SerializedName('deliveryDate')]
+    private ?string $delivery_date = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -33,11 +38,27 @@ class Order
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Item $item = null;
-
-    #[ORM\ManyToOne(inversedBy: 'orders')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\Column(length: 255)]
+    #[SerializedName('delivery_slot')]
+    private ?string $deliverySlot = null;
+
+    #[ORM\Column(length: 255)]
+    #[SerializedName('drop_off_date')]
+    private ?string $dropOffDate = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[SerializedName('order_date')]
+    private ?\DateTimeInterface $orderDate = null;
+
+    #[ORM\OneToMany(mappedBy: 'order', targetEntity: Item::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $items;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,12 +90,13 @@ class Order
         return $this;
     }
 
-    public function getDeliveryDate(): ?\DateTimeInterface
+    public function getDeliveryDate(): ?string
+
     {
         return $this->delivery_date;
     }
 
-    public function setDeliveryDate(\DateTimeInterface $delivery_date): static
+    public function setDeliveryDate(string $delivery_date): static
     {
         $this->delivery_date = $delivery_date;
 
@@ -93,18 +115,29 @@ class Order
         return $this;
     }
 
-    public function getItem(): ?Item
-    {
-        return $this->item;
+    public function addItem(Item $item): static
+{
+    if (!$this->items->contains($item)) {
+        $this->items->add($item);
+        $item->setOrder($this);
     }
 
-    public function setItem(?Item $item): static
-    {
-        $this->item = $item;
+    return $this;
+}
 
-        return $this;
+public function removeItem(Item $item): static
+{
+    if ($this->items->removeElement($item)) {
+        if ($item->getOrder() === $this) {
+            $item->setOrder(null);
+        }
     }
-
+    return $this;
+}
+public function getItems(): Collection
+{
+    return $this->items;
+}
     public function getUser(): ?User
     {
         return $this->user;
@@ -116,4 +149,41 @@ class Order
 
         return $this;
     }
+
+    public function getDeliverySlot(): ?string
+    {
+        return $this->deliverySlot;
+    }
+
+    public function setDeliverySlot(string $deliverySlot): static
+    {
+        $this->deliverySlot = $deliverySlot;
+
+        return $this;
+    }
+
+    public function getDropOffDate(): ?string
+    {
+        return $this->dropOffDate;
+    }
+
+    public function setDropOffDate(string $dropOffDate): static
+    {
+        $this->dropOffDate = $dropOffDate;
+
+        return $this;
+    }
+
+    public function getOrderDate(): ?\DateTimeInterface
+    {
+        return $this->orderDate;
+    }
+
+    public function setOrderDate(\DateTimeInterface $orderDate): static
+    {
+        $this->orderDate = $orderDate;
+
+        return $this;
+    }
+
 }

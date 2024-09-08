@@ -66,6 +66,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user')]
     private Collection $orders;
 
+    /**
+     * @var Collection<int, Order>
+     */
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -206,12 +210,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getGender(): ?gender
+    public function getGender(): ?Gender
     {
         return $this->gender;
     }
 
-    public function setGender(?gender $gender): static
+    public function setGender(?Gender $gender): static
     {
         $this->gender = $gender;
 
@@ -259,4 +263,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    
 }
